@@ -26,6 +26,10 @@ io.on("connection", (socket) => {
   socket.on("send_message", (data) => {
     socket.to(data.room).emit("receive_message", data);
   });
+
+  socket.on("typing", ({ username, room }) => {
+    socket.to(room).emit("user_typing", username);
+  });
 });
 
 server.listen(3010, () => {
