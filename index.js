@@ -9,11 +9,23 @@ app.use(cors());
 
 const server = http.createServer(app);
 
-new Server(server, {
+const io = new Server(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
   },
+});
+
+io.on("connection", (socket) => {
+  console.log("user connected", socket.id);
+  socket.on("join_room", (room) => {
+    socket.join(room);
+    console.log("user", socket.id, "joined", room);
+  });
+
+  socket.on("send_message", (data) => {
+    socket.to(data.room).emit("receive_message", data);
+  });
 });
 
 server.listen(3010, () => {
