@@ -19,7 +19,10 @@ pnpm-debug.log*
 Thumbs.db
 
 # VS Code settings
-.vscode/
 
 # Temporary files
 *.tmp
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
